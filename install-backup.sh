@@ -8,15 +8,14 @@ LOG="/var/log/backup.log"
 echo "🚀 Synology ZIP Backup Installer"
 
 # 1. PROMPT: Set proper hostname
-CURRENT_HOST=$(hostname)
-read -p "Current hostname: '$CURRENT_HOST'. Set to proper name? (y/N): " -n 1 -r
+read -p "Hostname '$CURRENT_HOST' OK? Change? (y/N): " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     read -p "New hostname: " NEW_HOST
     hostnamectl set-hostname "$NEW_HOST"
-    echo "✅ Hostname set to: $NEW_HOST"
-    echo "💡 Reboot after install to fully apply."
+    echo "✅ Set: $NEW_HOST (reboot later)"
 fi
+
 
 # 2. Download script
 curl -fsL "$GITHUB_RAW" -o "$SCRIPT_PATH" || {

@@ -1,3 +1,7 @@
+# usage: 
+# curl -fsL https://raw.githubusercontent.com/TTDARK/server-scripts/main/install-backup.sh -o install-backup.sh
+# bash install-backup.sh
+#
 #!/bin/bash
 GITHUB_RAW="https://raw.githubusercontent.com/TTDARK/server-scripts/main/backup.sh"
 SCRIPT_PATH="/root/backup.sh"

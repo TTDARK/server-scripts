@@ -14,9 +14,14 @@ sudo mount -t nfs4 "$SYNOLOGY_IP:/volume1/backup-vps" "$SYNOLOGY_MOUNT"
 
 echo "2. Checking $HOSTNAME folder..."
 if [ ! -d "$SYNOLOGY_MOUNT/$HOSTNAME" ]; then
-    echo "⚠️ Create $HOSTNAME folder manually on Synology first."
-    sudo umount "$SYNOLOGY_MOUNT"
-    exit 1
+    echo "Creating $HOSTNAME folder..."
+    sudo mkdir -p "$SYNOLOGY_MOUNT/$HOSTNAME"
+    if [ $? -ne 0 ]; then
+        echo "❌ Failed to create folder. Check NFS permissions."
+        sudo umount "$SYNOLOGY_MOUNT"
+        exit 1
+    fi
+    echo "✅ Folder created: $HOSTNAME"
 fi
 
 echo "3. Creating ZIP of /root/ contents..."
